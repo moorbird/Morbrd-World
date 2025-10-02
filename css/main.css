@@ -1,21 +1,169 @@
-/* Applies to the entire body of the HTML document (except where overridden by more specific
-selectors). */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-  margin: 25px;
-  background-color: rgb(240,240,240);
-  font-family: arial, sans-serif;
-  font-size: 14px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    background-color: rgb(17, 41, 44);
 }
 
-/* Applies to all <h1>...</h1> elements. */
-h1 {
-  font-size: 35px;
-  font-weight: normal;
-  margin-top: 5px;
+/* Book - Made larger */
+.book {
+    position: relative;
+    width: 450px;  /* Increased from 350px */
+    height: 600px; /* Increased from 500px */
+    transition: transform 0.5s;
 }
 
-/* Applies to all elements with <... class="someclass"> specified. */
-.someclass { color: red; }
+.paper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    perspective: 1500px;
+}
 
-/* Applies to the element with <... id="someid"> specified. */
-#someid { color: green; }
+.front,
+.back {
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-origin: left;
+    transition: transform 0.5s;
+}
+
+.front {
+    z-index: 1;
+    backface-visibility: hidden;
+    border-left: 3px solid powderblue;
+}
+
+.back {
+    z-index: 0;
+}
+
+.front-content,
+.back-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-content {
+    transform: rotateY(180deg)
+}
+
+/* Paper flip effect */
+.flipped .front,
+.flipped .back {
+    transform: rotateY(-180deg);
+}
+
+/* Controller Buttons */
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.5s;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover i {
+    color: #636363;
+}
+
+
+button.btn{background:Red;cursor: pointer;border: none;padding:15px 25px 15px 25px; border-radius:12px;font-size:18px;}
+button.btn:focus { outline: none;}
+button.btn:hover { background:DarkRed; color: white;}
+
+
+i {
+    font-size: 50px;
+    color: gray;
+}
+
+/* Paper stack order */
+#p1 {
+    z-index: 3;
+}
+
+#p2 {
+    z-index: 2;
+}
+
+#p3 {
+    z-index: 1;
+}
+
+#prev-btn {width: 50px;}
+#next-btn {width: 50px;}
+.bookcover{display:flex;flex-direction:column;padding:25px;}
+.bookpagecontent{display:flex;flex-direction:column;padding:25px;}
+.bookback{display:flex;flex-direction:column;padding:25px;}
+
+  .btn-effect-5 { border: 2px solid #3ae374; background: transparent; color: #3ae374; }
+  .btn-effect-5::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 0; height: 100%; background: #3ae374;
+      z-index: -1; transition: 0.5s;
+    }
+  .btn-effect-5:hover { color: #000; }
+  .btn-effect-5:hover::before { width: 100%; }
+
+
+
+
+
+/* NEW: Book container specific styles - only affects this page */
+.bookcontainer {
+    display: flex;
+    align-items: center;
+    gap: 60px; /* Space between buttons and book */
+}
+
+
+
+
+
+
+
+
+/* Optional: Responsive adjustments for the book container */
+@media (max-width: 768px) {
+    .book {
+        width: 300px;
+        height: 400px;
+    }
+    
+    .book-container {
+        gap: 40px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .book {
+        width: 500px;
+        height: 650px;
+    }
+    
+    .book-container {
+        gap: 80px;
+    }
+}
